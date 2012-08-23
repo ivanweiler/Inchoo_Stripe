@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Stripe payment
+ *
+ * @category	Inchoo
+ * @package		Inchoo_Stripe
+ * @author		Ivan Weiler <ivan.weiler@gmail.com>
+ * @copyright	Inchoo (http://inchoo.net)
+ * @license		http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Inchoo_Stripe>
+            <version>1.0.0</version>
+        </Inchoo_Stripe>
+    </modules>
+    <global>
+        <models>
+            <inchoo_stripe>
+                <class>Inchoo_Stripe_Model</class>
+            </inchoo_stripe>
+        </models>
+        <helpers>
+            <inchoo_stripe>
+                <class>Inchoo_Stripe_Helper</class>
+            </inchoo_stripe>
+        </helpers>
+    </global>
+
+    <default>
+        <payment>
+            <inchoo_stripe>
+            	<model>inchoo_stripe/payment</model>
+            	<api_key backend_model="adminhtml/system_config_backend_encrypted"/>
+            	<payment_action>authorize_capture</payment_action>
+            	<title>Stripe</title>
+            	<cctypes>AE,VI,MC,DI,JCB</cctypes>
+            	<useccv>1</useccv>
+                <min_order_total>0.50</min_order_total>
+            </inchoo_stripe>
+        </payment>
+    </default>
+</config>
