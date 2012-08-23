@@ -6,8 +6,6 @@ Stripe payment gateway handles everything, including storing cards, subscription
 Download stable releases from Magento Connect:
 <http://www.magentocommerce.com/magento-connect/inchoo-stripe-8266.html>
 
-Copyright (c) 2012 Ivan Weiler, Inchoo
-
 Changelog
 ---------
 * 1.0.0
