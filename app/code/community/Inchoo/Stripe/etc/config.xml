@@ -22,12 +22,27 @@
                 <class>Inchoo_Stripe_Model</class>
             </inchoo_stripe>
         </models>
+        <blocks>
+          <inchoo_stripe>
+            <class>Inchoo_Stripe_Block</class>
+          </inchoo_stripe>
+        </blocks>
         <helpers>
             <inchoo_stripe>
                 <class>Inchoo_Stripe_Helper</class>
             </inchoo_stripe>
         </helpers>
     </global>
+
+    <frontend>
+        <layout>
+          <updates>
+            <braintree>
+              <file>stripe.xml</file>
+            </braintree>
+          </updates>
+        </layout>
+    </frontend>
 
     <default>
         <payment>
