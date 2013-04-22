@@ -44,11 +44,9 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 
     	
 
-
     	try {
 
     		if(strlen($stripeCustomerId) == 0){
-
 	    		$customer = Stripe_Customer::create(array(
 					'email'	=> $order->getCustomerEmail(),
 					'description'	=> "New Customer " . $order->getCustomerEmail() . ' - ' . $order->getCustomerId(),
@@ -68,15 +66,14 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 				));
 	    			Mage::helper('advancedcompare')->saveStripe($order->getCustomerId(),$customer->id);
 	    			$stripeCustomerId = $customer->id;
-    		
     		}
 
     		// Check if we have new card details if so then update customer object.
-    		
     		$Stripe_Customer = Stripe_Customer::retrieve($stripeCustomerId);
     		$Stripe_Card = $Stripe_Customer->__get('active_card');
-    		
-    		if($Stripe_Card->last4 !== substr($payment->getCcNumber(), -4)){
+    		if($Stripe_Card->last4 !== substr($payment->getCcNumber(), -4) && strlen($payment->getCcCid()) > 2){
+               
+
     			$Stripe_Customer->card = array(
 						'number'			=>	$payment->getCcNumber(),
 						'exp_month'			=>	sprintf('%02d',$payment->getCcExpMonth()),
@@ -89,19 +86,12 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 						'address_state'		=>	$billing->getRegion(),
 						'address_country'	=>	$billing->getCountry(),
 					);
+                Mage::log($Stripe_Customer->card );
     			$Stripe_Customer->save();
     		}
 
-
-    		
-
-
     		if($amount > $this->_minOrderTotal )
     		{
-
-
-
-
 
 				$charge = Stripe_Charge::create(array(
 				  "amount" => $amount*100, # amount in cents, again
@@ -111,22 +101,17 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 				  )
 				);
 
-				
-
 				Mage::log($charge,null,'stripe.log',true);
 		
 		        $payment
 		        	->setTransactionId($charge->id)
 		        	->setIsTransactionClosed(0);
 
-			}
-
-			
+			}        	
     	
-			
 
 		} catch (Exception $e) {
-			$this->debugData("Paynent Error - Stripe - " . $e->getMessage());
+			$this->debugData("Payment Error - Stripe - " . $e->getMessage());
 			Mage::log($e->getMessage());
 			Mage::throwException($e->getMessage());
 			//Mage::throwException(Mage::helper('paygate')->__('Payment capturing error.'));
