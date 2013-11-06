@@ -1,0 +1,3 @@
+app/code/community/Inchoo          app/code/community/Inchoo
+lib/Stripe                         lib/Stripe
+app/etc/modules/Inchoo_Stripe.xml  app/etc/modules/Inchoo_Stripe.xml
