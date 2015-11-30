@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Stripe_Integrate</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license>MIT</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Stripe Integration for Magento</summary>
+    <description>Stripe Integration for Magento</description>
+    <notes>Stable release</notes>
+    <authors><author><name>vageli</name><user>vageli</user><email>vagelim@gmail.com</email></author></authors>
+    <date>2014-02-18</date>
+    <time>01:03:27</time>
+    <contents><target name="magecommunity"><dir name="Inchoo"><dir name="Stripe"><dir name="Helper"><file name="Data.php" hash="dbccef107620c35d8c06b8abc3bc9c73"/></dir><dir name="Model"><file name="Payment.php" hash="8e0e29fe6fef40f3b25bcfc75ce372d7"/><dir name="Source"><file name="Cctype.php" hash="fd954e86226185cf26eeb1e751b0fe43"/></dir></dir><dir name="etc"><file name="config.xml" hash="64f4102b7e99c11d48035fc2c6be2913"/><file name="system.xml" hash="3e5012fcc5260e2dcc4c3de345cf2886"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Inchoo_Stripe.xml" hash="ce9a4887f537535c29aade8f87b54f8c"/></dir></target><target name="magelib"><dir name="Stripe"><file name="LICENSE" hash="8e362b38ca7e9645633131c245de30c3"/><dir name="Stripe"><file name="ApiConnectionError.php" hash="7674930cb61f40e5f3208ad23127de61"/><file name="ApiError.php" hash="d6886665b4d1c666f1b7250d94fe1a00"/><file name="ApiRequestor.php" hash="9bdb1c5ab29b76e1f122c0382d6dc72d"/><file name="ApiResource.php" hash="dcd16dc42ed60cc696305b8a09a36d81"/><file name="AuthenticationError.php" hash="9fefa5160047e3a90b48cb9feac88b58"/><file name="CardError.php" hash="e3c971f0745d796ed8d730df093031fc"/><file name="Charge.php" hash="fa718e2e63b36f1e3cce1722ff8b6e46"/><file name="Coupon.php" hash="6197a26c806b0f71360153070057b344"/><file name="Customer.php" hash="c332c1d648b58fe7d1d45d3d4ea98704"/><file name="Error.php" hash="59144086a69b194195d1a0c74e4a00b5"/><file name="InvalidRequestError.php" hash="efcd61c26de0bce74f298d242156e4b3"/><file name="Invoice.php" hash="509d034aa60b7c8dbed5f285e493ff13"/><file name="InvoiceItem.php" hash="3498036fca447bc17768b365b0dcd739"/><file name="Object.php" hash="a810b4fb8c7b8e340e509a7e63b54168"/><file name="Plan.php" hash="d76e959e2f7879eccdef85c99b1aa708"/><file name="Token.php" hash="a804bd705fbfb8b0366437f836d605b9"/><dir name="Util"><file name="Set.php" hash="b8f9cb0a7ee64dc3f4a11dcfef50008d"/></dir><file name="Util.php" hash="03c146e9e5f69cd8107191bab231b8d6"/></dir><file name="Stripe.php" hash="5b420d63c69d8ef822b78181585b7b10"/><dir name="data"><file name="ca-certificates.crt" hash="2b2cac7abbfdb79219e474d49158d7a9"/></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>
