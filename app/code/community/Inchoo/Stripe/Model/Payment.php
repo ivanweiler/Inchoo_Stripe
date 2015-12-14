@@ -14,7 +14,7 @@ require_once Mage::getBaseDir('lib').DS.'Stripe'.DS.'Stripe.php';
 class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 {
 	protected $_code	=	'inchoo_stripe';
-	
+
     protected $_isGateway                   = true;
     protected $_canCapture                  = true;
     protected $_canCapturePartial           = true;
@@ -22,17 +22,17 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 
     protected $_supportedCurrencyCodes = array('USD');
     protected $_minOrderTotal = 0.5;
-    
+
     public function __construct()
     {
 		Stripe::setApiKey($this->getConfigData('api_key'));
-    }    
-        
+    }
+
     public function capture(Varien_Object $payment, $amount)
     {
     	$order = $payment->getOrder();
     	$billing = $order->getBillingAddress();
-    	
+
     	try {
 			$charge = Stripe_Charge::create(array(
 				'amount'	=> $amount*100,
@@ -53,18 +53,18 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 			));
 		} catch (Exception $e) {
 			$this->debugData($e->getMessage());
-			Mage::throwException(Mage::helper('paygate')->__('Payment capturing error.'));
+			Mage::throwException(Mage::helper('paygate')->__('Payment capturing error: %s', $e->getMessage()));
 		}
-		
+
 		//Mage::log($charge,null,'stripe.log',true);
-		
+
         $payment
         	->setTransactionId($charge->id)
         	->setIsTransactionClosed(0);
-		
+
         return $this;
     }
-    
+
     public function refund(Varien_Object $payment, $amount)
     {
     	$transactionId = $payment->getParentTransactionId();
@@ -80,21 +80,21 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 			->setTransactionId($transactionId . '-' . Mage_Sales_Model_Order_Payment_Transaction::TYPE_REFUND)
 			->setParentTransactionId($transactionId)
 			->setIsTransactionClosed(1)
-			->setShouldCloseParentTransaction(1);	
-		
+			->setShouldCloseParentTransaction(1);
+
         return $this;
-    }    
-    
+    }
+
 	public function isAvailable($quote = null)
     {
     	if($quote && $quote->getBaseGrandTotal()<$this->_minOrderTotal) {
     		return false;
     	}
-    	
+
         return $this->getConfigData('api_key', ($quote ? $quote->getStoreId() : null))
             && parent::isAvailable($quote);
     }
-    
+
     public function canUseForCurrency($currencyCode)
     {
         if (!in_array($currencyCode, $this->_supportedCurrencyCodes)) {
@@ -102,5 +102,5 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
         }
         return true;
     }
-	
+
 }
