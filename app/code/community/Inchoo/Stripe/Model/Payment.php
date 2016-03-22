@@ -53,7 +53,7 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 			));
 		} catch (Exception $e) {
 			$this->debugData($e->getMessage());
-			Mage::throwException(Mage::helper('paygate')->__('Payment capturing error.'));
+			Mage::throwException(Mage::helper('paygate')->__("There was a problem charging your credit card. " . $e->getMessage()));
 		}
 		
 		//Mage::log($charge,null,'stripe.log',true);
