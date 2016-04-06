@@ -22,6 +22,7 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
 
     protected $_supportedCurrencyCodes = array('USD');
     protected $_minOrderTotal = 0.5;
+    protected $_canRefundInvoicePartial = true;
     
     public function __construct()
     {
@@ -70,7 +71,9 @@ class Inchoo_Stripe_Model_Payment extends Mage_Payment_Model_Method_Cc
     	$transactionId = $payment->getParentTransactionId();
 
 		try {
-			Stripe_Charge::retrieve($transactionId)->refund();
+			Stripe_Charge::retrieve($transactionId)->refund(array(
+              'amount'  => $amount*100
+            ));
 		} catch (Exception $e) {
 			$this->debugData($e->getMessage());
 			Mage::throwException(Mage::helper('paygate')->__('Payment refunding error.'));
